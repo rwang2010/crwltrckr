@@ -1,0 +1,12 @@
+<p>
+  <strong>Name:</strong>
+  <%= @crawl_project.name %>
+</p>
+ 
+<p>
+  <strong>Description:</strong>
+  <%= @crawl_project.description %>
+</p>
+
+<%= link_to 'Edit', edit_crawl_project_path(@crawl_project) %> |
+<%= link_to 'Back', crawl_projects_path %>
