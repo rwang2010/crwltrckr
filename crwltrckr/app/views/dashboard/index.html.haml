@@ -90,11 +90,15 @@
 								%ul.todo-list.small-list
 									%li
 										= check_box_tag("1", "task", checked = true)
+										%span
+											Extract foursquare
 										%div.ibox-tools
 											%a.close-link
 												%i.fa.fa-times
 									%li
 										= check_box_tag("2", "task", checked = true)
+										%span
+											Reactivate yahoo crawl
 										%div.ibox-tools
 											%a.close-link
 												%i.fa.fa-times
@@ -142,4 +146,9 @@
 	    e.preventDefault();
 	    console.log($(this));
 	    $(this).parent().parent().remove();
+	});
+
+	$('.input-group').on('submit', function(e) {
+		e.preventDefault();
+		$('.todo-list').append('<li> <input type="checkbox" value="task" checked="checked">');
 	});
