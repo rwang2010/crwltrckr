@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730000244) do
+ActiveRecord::Schema.define(version: 20150730213900) do
 
   create_table "crawl_projects", force: :cascade do |t|
     t.string   "name"
@@ -20,12 +20,22 @@ ActiveRecord::Schema.define(version: 20150730000244) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "crawl_projects_hosts", id: false, force: :cascade do |t|
+    t.integer "crawl_project_id"
+    t.integer "host_id"
+  end
+
+  add_index "crawl_projects_hosts", ["crawl_project_id"], name: "index_crawl_projects_hosts_on_crawl_project_id"
+  add_index "crawl_projects_hosts", ["host_id"], name: "index_crawl_projects_hosts_on_host_id"
+
   create_table "hosts", force: :cascade do |t|
     t.integer  "pipelines_id"
     t.string   "domain"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  add_index "hosts", ["pipelines_id"], name: "index_hosts_on_pipelines_id", unique: true
 
   create_table "todos", force: :cascade do |t|
     t.text     "text"

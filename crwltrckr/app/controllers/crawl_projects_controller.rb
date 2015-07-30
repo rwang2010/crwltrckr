@@ -6,6 +6,7 @@ class CrawlProjectsController < ApplicationController
 
   def show
     @crawl_project = CrawlProject.find(params[:id])
+    @stats_keys = %w(id name crawl_active extract_active recrawl_enabled active_host_patterns found cached queued failed last_cached last_extraction)
   end
 
   def new
@@ -46,6 +47,6 @@ class CrawlProjectsController < ApplicationController
   private
 
   def crawl_project_params
-    params.require(:crawl_project).permit(:name, :description)
+    params.require(:crawl_project).permit(:name, :description, :host_name)
   end
 end

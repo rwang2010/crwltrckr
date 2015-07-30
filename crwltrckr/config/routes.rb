@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :crawl_projects
-  resources :users
+  resources :hosts
 
 
   # The priority is based upon order of creation: first created -> highest priority.
