@@ -6,7 +6,7 @@
 			%nav.navbar.navbar-static-top
 				%ul.nav.navbar-top-links.navbar-right
 					%li
-						= link_to "Log out", "login.html.haml"
+						= link_to "Log out", login_path
 		%div.wrapper
 			%div.container
 				%div.row.gray-bg
@@ -146,9 +146,4 @@
 	    e.preventDefault();
 	    console.log($(this));
 	    $(this).parent().parent().remove();
-	});
-
-	$(document).on('click', 'a', function (e) {
-	    e.preventDefault();
-	    $(this).parent().remove();
 	});

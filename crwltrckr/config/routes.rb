@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'dashboard#index'
-  resources :login
-
+  get "/login", to: 'login#index', as: 'login'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

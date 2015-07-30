@@ -5,22 +5,21 @@
             %div
 
                 %h1.logo-name
-                    Crawl Tracker
+                    ／/＼｡｡／\＼
 
             %h3
                 Welcome to Crawl Tracker
             %p
-                Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                Perfectly designed and precisely prepared with with extra new crawl metric views.
             
             %p
                 Login in. To see it in action.
             %form{:class => "m-t"}
                 %div.form-group
-                    %input{:type => "email"}
+                    %input{:type => "email", :class => "form-control", :placeholder => "Username", :required => ""}
                 %div.form-group
-                    %input{:type => "password"}
-                %button{:type => "button", :class => "btn btn-primary block full-width m-b"}
-                    Login
+                    %input{:type => "password", :class => "form-control", :placeholder => "Password", :required => ""}
+                = button_to "Login", root_path, class: "btn btn-primary block full-width m-b"
                 %a{:href => "#"}
                     %small
                         Forgot password?
@@ -31,6 +30,6 @@
                     Create an account
             %p.m-t
                 %small
-                    Crawl Tracker app framework base on Boostrap 3 &copy; 2014
+                    Crawl Tracker app &copy; 2015
 
 = javascript_include_tag "jquery-2.1.1.js"
