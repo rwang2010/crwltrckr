@@ -14,12 +14,12 @@
             
             %p
                 Login in. To see it in action.
-            %form{:class => "m-t"}
+            = form_tag(authenticate_path, :class => "m-t") do |f| 
                 %div.form-group
-                    %input{:type => "email", :class => "form-control", :placeholder => "Username", :required => ""}
+                    %input{:type => "text", :name => "username", :class => "form-control", :placeholder => "Username", :required => ""}
                 %div.form-group
-                    %input{:type => "password", :class => "form-control", :placeholder => "Password", :required => ""}
-                = button_to "Login", root_path, class: "btn btn-primary block full-width m-b"
+                    %input{:type => "password", :name => "password", :class => "form-control", :placeholder => "Password", :required => ""}
+                = submit_tag 'Login', :class => "btn btn-primary block full-width m-b"
                 %a{:href => "#"}
                     %small
                         Forgot password?
