@@ -11,13 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729231354) do
+ActiveRecord::Schema.define(version: 20150730000244) do
 
   create_table "crawl_projects", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "hosts", force: :cascade do |t|
+    t.integer  "pipelines_id"
+    t.string   "domain"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "todos", force: :cascade do |t|
@@ -28,10 +35,11 @@ ActiveRecord::Schema.define(version: 20150729231354) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.string   "password"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "password_hash"
+    t.string   "password_salt"
   end
 
 end
