@@ -1792,7 +1792,7 @@ table.dataTable thead .sorting:after {
   padding: 6px 12px;
   text-align: center;
 }
-.todo-input {
+.todo-checkbox {
   margin-left: 10px;
 }
 .spinner-buttons.input-group-btn .btn-xs {
@@ -3282,6 +3282,7 @@ video {
 }
 #page-wrapper {
   padding: 0 15px;
+  margin: auto;
   min-height: 568px;
   position: relative !important;
 }
@@ -7378,7 +7379,7 @@ body.skin-3 {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 220px;
+    margin: auto;
     min-height: 1200px;
   }
   .navbar-static-side {

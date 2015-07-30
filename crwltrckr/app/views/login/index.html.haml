@@ -14,11 +14,11 @@
             
             %p
                 Login in. To see it in action.
-            = form_tag("index.html", class: "m-t", role: "form")
+            %form{:class => "m-t"}
                 %div.form-group
-                    %input{:type => "email", :class => "form-control", :placeholder = "Username", :required => ""}
+                    %input{:type => "email"}
                 %div.form-group
-                    %input{:type => "password", :class => "form-control", :placeholder = "Password", :required => ""}
+                    %input{:type => "password"}
                 %button{:type => "button", :class => "btn btn-primary block full-width m-b"}
                     Login
                 %a{:href => "#"}
@@ -34,4 +34,3 @@
                     Crawl Tracker app framework base on Boostrap 3 &copy; 2014
 
 = javascript_include_tag "jquery-2.1.1.js"
-= javascript_include_tag "bootstrap.min.js"
