@@ -1,0 +1,21 @@
+<h1>Listing crawl_projects</h1>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @crawl_projects.each do |crawl_project| %>
+    <tr>
+      <td><%= crawl_project.name %></td>
+      <td><%= crawl_project.description %></td>
+      <td><%= link_to 'Show', crawl_project_path(crawl_project) %></td>
+      <td><%= link_to 'Edit', edit_crawl_project_path(crawl_project) %></td>
+      <td><%= link_to 'Destroy', crawl_project_path(crawl_project),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
