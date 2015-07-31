@@ -3,7 +3,7 @@ class Host < ActiveRecord::Base
   validates :pipelines_id, uniqueness: true
   has_and_belongs_to_many :crawl_projects, -> { uniq }
 
-  PIPELINES_HOST = "http://localhost:3001"
+  PIPELINES_HOST = "http://10.0.100.228:3000"
 
   def stats
     path = "/hosts/#{self.pipelines_id}/stats.json"
