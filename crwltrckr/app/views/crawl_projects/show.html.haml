@@ -1,7 +1,7 @@
 
 %div#wrapper
   %div#page-wrapper
-    = render 'stats_table'
+    = render partial: 'stats_table', locals: { crawl_project: @crawl_project, stats_keys: @stats_keys }
 
 = link_to 'Edit', edit_crawl_project_path(@crawl_project)
 = link_to 'Back', crawl_projects_path()

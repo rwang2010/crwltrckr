@@ -31,7 +31,7 @@ class CrawlProjectsController < ApplicationController
     @crawl_project = CrawlProject.find(params[:id])
    
     if @crawl_project.update(crawl_project_params)
-      redirect_to @crawl_project
+      redirect_to(:back)
     else
       render 'edit'
     end
