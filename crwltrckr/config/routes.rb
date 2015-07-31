@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
   get "/login", to: 'login#index', as: 'login'
   get "/stats", to: 'stats#index', as: 'stats'
+  post "/authenticate", to: 'login#authenticate', as: 'authenticate'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

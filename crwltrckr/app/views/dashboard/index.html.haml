@@ -83,25 +83,24 @@
 								%span.label.label-info.pull-right
 								%h5
 									TODO
-								%div.ibox-tools
-									%button
-										%i.fa.fa-plus-square-o
+								%div.input-group
+									%input{:type => "text", :id => "task-input", :class => "todo-input", :size => 42, :placeholder => "New task"}
 							%div.ibox-content
 								%ul.todo-list.small-list
 									%li
 										= check_box_tag("1", "task", checked = true)
+										%span
+											Extract foursquare
 										%div.ibox-tools
 											%a.close-link
 												%i.fa.fa-times
 									%li
 										= check_box_tag("2", "task", checked = true)
+										%span
+											Reactivate yahoo crawl
 										%div.ibox-tools
 											%a.close-link
 												%i.fa.fa-times
-									%li
-										%div.input-group
-											= check_box_tag("3", "task", checked = false)
-											= text_field_tag("task-input", nil, size: 45, class: "todo-input")
 						%div.row
 							%div.ibox.float-e-margins
 							%div.ibox-title
@@ -125,10 +124,6 @@
 											Limit amount
 										%h4
 											8000
-		%form
-			%label Enter a Todo and hit enter!
-			%input{:type => "text"}
-		%ul
 
 :javascript 
 	$('form').submit(function () {
@@ -142,8 +137,17 @@
 	    return false;
 	});
 
+	$('#task-input').keypress(function(e) {
+		if(e.which == 13) {
+			if ($('.todo-input').val() !== '') {
+				var input_value = $('.todo-input').val();
+				$('.todo-list').append('<li><input type="checkbox" value="task"><span>\n' + input_value + '<div class="ibox-tools"> <a class="close-link"> <i class="fa fa-times">');
+			}
+		}
+	});
+
 	$('.close-link').click(function(e) {
 	    e.preventDefault();
 	    console.log($(this));
-	    $(this).parent().parent().remove();
+	    $(this).closest('li').remove();
 	});
