@@ -142,7 +142,12 @@
 			if ($('.todo-input').val() !== '') {
 				var input_value = $('.todo-input').val();
 				
-				$('.todo-list').append('<li><input type="checkbox" value="task"></input><span>\n' + input_value + '</span><div class="ibox-tools"><a class="close-link"><i class="fa fa-times"></i></a></div></li>');
+				$('.todo-list').append('<li><input type="checkbox" value="task"></input><span>\n' + input_value + '</span><div class="ibox-tools"><a class="close-link"><i class="fa fa-times"></i></a></div></li>').find('.close-link').click(function(e) {
+	    			e.preventDefault();
+	    			console.log($(this));
+	    			$(this).parent().parent().remove();
+	    			//$(this).closest('li').remove();
+				});
 			}
 		}
 	});
@@ -150,5 +155,6 @@
 	$('.close-link').click(function(e) {
 	    e.preventDefault();
 	    console.log($(this));
-	    $(this).closest('li').remove();
+	    $(this).parent().parent().remove();
+	    //$(this).closest('li').remove();
 	});
