@@ -4,9 +4,11 @@ include ActionView::Helpers::NumberHelper
 class Host < ActiveRecord::Base
   validates :pipelines_id, presence: true
   validates :pipelines_id, uniqueness: true
-  has_and_belongs_to_many :crawl_projects, -> { uniq }
+  serialize :cached_ages, Array
+  has_and_belongs_to_many :crawl_projects
 
   PIPELINES_HOST = "http://10.0.100.228:3000"
+  CACHED_AGES_UPDATE_INTERVAL = 15 #days 
 
   def stats
     path = "/hosts/#{self.pipelines_id}/stats.json"
@@ -17,7 +19,32 @@ class Host < ActiveRecord::Base
     stats['regression_tests'] = format_regression_tests(stats["regression_tests"])
     stats['last_cached'] = date_to_days_ago(stats["last_cached"])
     stats['last_extraction'] = date_to_days_ago(stats["last_extraction"])
+    stats['cached_ages'] = get_cached_ages
     stats
+  end
+
+  def get_cached_ages
+    if self.cached_ages_updated_at && self.cached_ages_updated_at > Date.today - CACHED_AGES_UPDATE_INTERVAL
+      return self.cached_ages
+    else
+      self.cached_ages_updated_at = Date.today
+      counts = []
+      counts << input_age_count('cached', 91)
+      counts << input_age_count('cached', 182, 91)
+      counts << input_age_count('cached', 365, 182)
+      counts << input_age_count('cached', 710, 365)
+      counts << input_age_count('cached', 100000, 710)
+      self.cached_ages = counts
+      self.save
+      return counts
+    end
+  end
+
+  def input_age_count(type='cached', days_ago_start=nil, days_ago_end=nil)
+    path = "/hosts/#{self.pipelines_id}/urls/stats.json?type=#{type}"
+    path += "&days_ago_start=#{days_ago_start}" if days_ago_start
+    path += "&days_ago_end=#{days_ago_end}" if days_ago_end
+    count = self.class.get_json_from_pipelines(path)['count']
   end
 
   def format_regression_tests(tests)

@@ -1,7 +1,7 @@
 class CrawlProject < ActiveRecord::Base
   validates :name, presence: true, length: { minimum: 5 }
 
-  has_and_belongs_to_many :hosts, -> { uniq }
+  has_and_belongs_to_many :hosts
 
   before_validation :host_name_to_pipelines_id, if: :host_name
 
@@ -13,8 +13,12 @@ class CrawlProject < ActiveRecord::Base
       return
     end
     host = Host.where(pipelines_id: pipelines_id).first
-    if host
-      self.hosts << host
+    @host_name = nil
+    if host 
+      if !self.hosts.include?(host)
+        self.hosts << host
+        self.save
+      end
     else
       self.hosts.create(pipelines_id: pipelines_id)
     end

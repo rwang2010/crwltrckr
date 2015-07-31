@@ -1,0 +1,33 @@
+%div.middle-box.text-center.loginscreen.animated.fadeInDown
+  %div
+    %div
+      %h1.logo-name
+        ／/＼｡｡／\＼
+      %h3
+        Welcome to Crawl Tracker
+      %p
+        Perfectly designed and precisely prepared with with extra new crawl metric views.
+      
+      %p
+        Login in. To see it in action.
+
+      = form_tag sessions_path, :class => "m-t" do |f| 
+        %div.form-group
+          = text_field_tag :email, params[:email], class: 'form-control', placeholder: 'Email'
+        %div.form-group
+          = password_field_tag :password, params[:password], class: 'form-control', placeholder: 'Password'
+        = submit_tag 'Login', :class => "btn btn-primary block full-width m-b"
+        %a{:href => "#"}
+          %small
+            Forgot password?
+        %p.text-muted.text-center
+          %small
+            Do not have an account?
+        %a{:href => "/sign_up", :class => "btn btn-sm btn-white btn-block"}
+          Create an account
+      %p.m-t
+        %small
+          Crawl Tracker app &copy; 2015
+
+= javascript_include_tag "jquery-2.1.1.js"
+

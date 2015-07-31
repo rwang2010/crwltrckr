@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730213900) do
+ActiveRecord::Schema.define(version: 20150731061359) do
 
   create_table "crawl_projects", force: :cascade do |t|
     t.string   "name"
@@ -31,8 +31,10 @@ ActiveRecord::Schema.define(version: 20150730213900) do
   create_table "hosts", force: :cascade do |t|
     t.integer  "pipelines_id"
     t.string   "domain"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.text     "cached_ages",            default: "--- []\n"
+    t.datetime "cached_ages_updated_at"
   end
 
   add_index "hosts", ["pipelines_id"], name: "index_hosts_on_pipelines_id", unique: true

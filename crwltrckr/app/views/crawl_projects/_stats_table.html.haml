@@ -5,13 +5,15 @@
     = link_to crawl_project.name, crawl_project_path(crawl_project)
 %div.ibox-content
   %div.table-responsive
-    %table.table.table-striped
+    %table.table.table-striped{style: "height: 100%; min-height:1px"}
       %thead
         %tr
           %th
           - stats_keys.each do |key|
             %th
               = key.gsub(/_/, ' ').titleize
+          %th
+            Input Ages
 
       %tbody
         - crawl_project.hosts.each do |host| 
@@ -26,6 +28,8 @@
                   = link_to stats[key], "https://pipelines.factual.com/hosts/#{host.pipelines_id}/edit"
                 - else
                   = stats[key]  
+            %td
+              = render partial: 'hosts/ages_chart', locals: {ages: stats['cached_ages']}
 
   = form_for crawl_project do |f| 
     %p
