@@ -141,7 +141,8 @@
 		if(e.which == 13) {
 			if ($('.todo-input').val() !== '') {
 				var input_value = $('.todo-input').val();
-				$('.todo-list').append('<li><input type="checkbox" value="task"><span>\n' + input_value + '<div class="ibox-tools"> <a class="close-link"> <i class="fa fa-times">');
+				
+				$('.todo-list').append('<li><input type="checkbox" value="task"></input><span>\n' + input_value + '</span><div class="ibox-tools"><a class="close-link"><i class="fa fa-times"></i></a></div></li>');
 			}
 		}
 	});
