@@ -29,4 +29,8 @@
                   = link_to "Log in", log_in_path
       - flash.each do |name, msg|
         = content_tag :div, msg, :id => "flash_#{name}"
-      = yield
+      %div.container
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :id => "flash_#{name}"
+        %div.ibox.float-e-margins
+        = yield

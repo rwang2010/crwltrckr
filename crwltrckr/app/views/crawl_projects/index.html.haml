@@ -1,0 +1,27 @@
+%div.ibox-title
+  %h5
+    Crawl Projects
+ 
+%div.ibox-content
+  %div.table-responsive
+    %table.table.table-striped
+      %tr
+        %th
+          Name
+        %th
+          Description
+        %th{colspan: 2}
+     
+      - @crawl_projects.each do |crawl_project|
+        %tr
+          %td
+            = link_to crawl_project.name, crawl_project_path(crawl_project)
+          %td
+            = crawl_project.description
+          %td
+            = link_to 'Edit', edit_crawl_project_path(crawl_project)
+          %td
+            = link_to 'Destroy', crawl_project_path(crawl_project), method: :delete, data: { confirm: 'Are you sure?' }
+
+%div.ibox-content
+  = link_to "New Crawl Project", new_crawl_project_path, class: "btn btn-primary"

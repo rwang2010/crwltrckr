@@ -1,0 +1,19 @@
+= form_for @crawl_project do |f|
+ 
+  - if @crawl_project.errors.any?
+    %div#error_explanation
+      %h2
+        = pluralize(@crawl_project.errors.count, "error")
+        prohibited this crawl project from being saved:
+      %ul
+        - @crawl_project.errors.full_messages.each do |msg|
+          %li
+            = msg
+ 
+  %div.form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+    = f.label :description
+    = f.text_area :description, class: 'form-control'
+    %br
+    = f.submit "Create", class: "btn btn-primary"
