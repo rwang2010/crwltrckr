@@ -1,92 +1,96 @@
 %div.wrapper
-	%div.container
-		%div.row.gray-bg
-			%div.col-lg-12
-				%div.ibox.float-e-margins
+	%div
+		%div.row.border-bottom
+			%nav.navbar.navbar-static-top
+				%ul.nav.navbar-top-links.navbar-right
+					%li
+						= link_to "Log out", login_path
+		%div.container
+			%h1
+				Crawl Stats
+			%div.row
+				%div.col-lg-12
+					%div.ibox.float-e-margins
+					%div.ibox-content
+						%div.table-responsive
+							%table.table.table-striped
+								%thead
+									%tr
+										%th
+											
+										%th
+											Host
+										%th
+											Cached
+										%th
+											Days without crawl
+										%th
+											Last extraction date
+										%th
+											Regression tests
+								%tbody
+									%tr
+										%td
+											%div
+												= image_tag("crawl_green.svg", height: '18', width: '18')
+												= image_tag("extract_green.svg", height: '18', width: '18')
+										%td
+											foursquare.com
+										%td
+											17820015
+										%td
+											3
+										%td
+											2015-07-27
+										%td
+											51 Passed , 6 Failed
+									%tr
+										%td
+											%div
+												= image_tag("crawl_green.svg", height: '18', width: '18')
+												= image_tag("extract_red.svg", height: '18', width: '18')
 
-				%div.ibox-title
-					%h5
-						Crawl Stats
-				%div.ibox-content
-					%div.table-responsive
-						%table.table.table-striped
-							%thead
-								%tr
-									%th
-										
-									%th
-										Host
-									%th
-										Cached
-									%th
-										Days without crawl
-									%th
-										Last extraction date
-									%th
-										Regression tests
-							%tbody
-								%tr
-									%td
-										%div
-											= image_tag("crawl_green.svg", height: '18', width: '18')
-											= image_tag("extract_green.svg", height: '18', width: '18')
-									%td
-										foursquare.com
-									%td
-										17820015
-									%td
-										3
-									%td
-										2015-07-27
-									%td
-										51 Passed , 6 Failed
-								%tr
-									%td
-										%div
-											= image_tag("crawl_green.svg", height: '18', width: '18')
-											= image_tag("extract_red.svg", height: '18', width: '18')
+										%td
+											tastingtable.com
+										%td
+											6351
+										%td
+											%p.text-danger
+												80
+										%td
+											2015-02-12
+										%td
+											20 Passed
+									%tr
+										%td
+											%div
+												= image_tag("crawl_red.svg", height: '18', width: '18')
+												= image_tag("extract_red.svg", height: '18', width: '18')
 
-									%td
-										tastingtable.com
-									%td
-										6351
-									%td
-										%p.text-danger
-											80
-									%td
-										2015-02-12
-									%td
-										20 Passed
-								%tr
-									%td
-										%div
-											= image_tag("crawl_red.svg", height: '18', width: '18')
-											= image_tag("extract_red.svg", height: '18', width: '18')
+										%td
+											google.com
+										%td
+											1392
+										%td
+											%p.text-warning
+												30
+										%td
+											2015-06-12
+										%td
+											20 Passed
+									%tr
+										%td
+											%div
+												= image_tag("crawl_green.svg", height: '18', width: '18')
+												= image_tag("extract_green.svg", height: '18', width: '18')
 
-									%td
-										google.com
-									%td
-										1392
-									%td
-										%p.text-warning
-											30
-									%td
-										2015-06-12
-									%td
-										20 Passed
-								%tr
-									%td
-										%div
-											= image_tag("crawl_green.svg", height: '18', width: '18')
-											= image_tag("extract_green.svg", height: '18', width: '18')
-
-									%td
-										google.com
-									%td
-										1392
-									%td
-										5
-									%td
-										2015-06-12
-									%td
-										20 Passed
+										%td
+											google.com
+										%td
+											1392
+										%td
+											5
+										%td
+											2015-06-12
+										%td
+											20 Passed

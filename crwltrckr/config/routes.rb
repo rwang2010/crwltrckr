@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'dashboard#index'
   get "/login", to: 'login#index', as: 'login'
+  get "/stats", to: 'stats#index', as: 'stats'
   post "/authenticate", to: 'login#authenticate', as: 'authenticate'
 
   # Example of regular route:
