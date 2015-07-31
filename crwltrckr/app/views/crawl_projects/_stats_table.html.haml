@@ -17,7 +17,7 @@
 
       %tbody
         - crawl_project.hosts.each do |host| 
-          - stats = host.stats 
+          - stats = host.get_stats
           %tr
             %td
               = link_to 'x', host_path(host), method: :delete, data: { confirm: 'Are you sure?' } 

@@ -4,14 +4,25 @@ include ActionView::Helpers::NumberHelper
 class Host < ActiveRecord::Base
   validates :pipelines_id, presence: true
   validates :pipelines_id, uniqueness: true
-  serialize :cached_ages, Array
+  serialize :stats, Hash
   has_and_belongs_to_many :crawl_projects
 
-#   PIPELINES_HOST = "http://10.0.100.228:3000"
-  PIPELINES_HOST = "http://10.0.100.210:3001"
+  PIPELINES_HOST = "http://10.0.100.228:3000"
+#   PIPELINES_HOST = "http://10.0.100.210:3001"
   CACHED_AGES_UPDATE_INTERVAL = 15 #days 
+  STATS_UPDATE_INTERVAL = 1 #days 
 
-  def stats
+  def get_stats
+    if self.stats['updated_at'] && self.stats['updated_at'] > Date.today - STATS_UPDATE_INTERVAL
+      return self.stats
+    end
+    self.stats = get_stats_from_pipelines()
+    self.stats['updated_at'] = Date.today
+    self.save
+    self.stats
+  end
+
+  def get_stats_from_pipelines
     path = "/hosts/#{self.pipelines_id}/stats.json"
     stats = self.class.get_json_from_pipelines(path)
     %w(cached queued found failed).each do |key|
@@ -25,20 +36,17 @@ class Host < ActiveRecord::Base
   end
 
   def get_cached_ages
-    if self.cached_ages_updated_at && self.cached_ages_updated_at > Date.today - CACHED_AGES_UPDATE_INTERVAL
-      return self.cached_ages
-    else
-      self.cached_ages_updated_at = Date.today
-      counts = []
-      counts << input_age_count('cached', 91)
-      counts << input_age_count('cached', 182, 91)
-      counts << input_age_count('cached', 365, 182)
-      counts << input_age_count('cached', 710, 365)
-      counts << input_age_count('cached', 100000, 710)
-      self.cached_ages = counts
-      self.save
-      return counts
+    if self.stats['cached_ages_updated_at'] && self.stats['cached_ages_updated_at'] > Date.today - CACHED_AGES_UPDATE_INTERVAL
+      return self.stats['cached_ages']
     end
+    self.stats['cached_ages_updated_at'] = Date.today
+    counts = []
+    counts << input_age_count('cached', 91)
+    counts << input_age_count('cached', 182, 91)
+    counts << input_age_count('cached', 365, 182)
+    counts << input_age_count('cached', 710, 365)
+    counts << input_age_count('cached', 100000, 710)
+    counts
   end
 
   def input_age_count(type='cached', days_ago_start=nil, days_ago_end=nil)
