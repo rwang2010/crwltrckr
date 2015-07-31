@@ -2,6 +2,8 @@
   %div.container
     %div.row.gray-bg
       %div.col-lg-12
+        %div.ibox-title
+          %h5 Crawl Activity
         %div.ibox.float-e-margins
           %div.ibox-content
             %div
@@ -11,6 +13,15 @@
         - @crawl_projects.each do |crawl_project|
           - stats_keys = %w(name cached last_cached last_extraction regression_tests)
           = render partial: 'crawl_projects/stats_table', locals: {crawl_project: crawl_project, stats_keys: stats_keys}
+
+        %div#scrappy-space
+
+        %div.ibox-title
+          %h5 Scrappy Health
+        %div.ibox.float-e-margins
+          %div.ibox-content
+            %div
+              = image_tag("http://graphite.prod.factual.com:31900/render?from=-1hours&target=groupByNode(stats.gauges.pipelines.prod.scrappy.*.*.*.reported,4,%27sum%27)&drawNullAsZero=true&areaMode=all&areaAlpha=0.5&height=250&width=1000&bgcolor=white&fgcolor=black", :style => "width: 100%")
 
       %div.col-md-4
         %div.row
