@@ -14,7 +14,7 @@
             %div.ibox.float-e-margins
               %div.ibox-content
                 %div
-                  = image_tag("http://graphite.prod.factual.com:31900/render?from=-3hours&target=groupByNode(stats.counters.pipelines.prod.*.*.*.count,%206,%20%27sum%27)&height=250&width=1000&bgcolor=f3f3f4&fgcolor=black", :style => "width: 100%")
+                  = image_tag("http://graphite.prod.factual.com:31900/render?from=-3hours&target=groupByNode(stats.counters.pipelines.prod.*.*.*.count,%206,%20%27sum%27)&height=250&width=1000&bgcolor=white&fgcolor=black", :style => "width: 100%")
         %div.row.gray-bg
           %div.col-md-8
             - @crawl_projects.each do |crawl_project|
