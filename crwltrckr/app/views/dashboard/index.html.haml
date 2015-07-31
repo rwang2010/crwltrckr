@@ -1,153 +1,165 @@
 = stylesheet_link_tag "http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 = javascript_include_tag "jquery-2.1.1.js"
 %div#wrapper
-	%div#page-wrapper
-		%div.row.border-bottom
-			%nav.navbar.navbar-static-top
-				%ul.nav.navbar-top-links.navbar-right
-					%li
-						= link_to "Log out", login_path
-		%div.wrapper
-			%div.container
-				%div.row
-					%div.col-lg-12
-						%div.ibox.float-e-margins
-							%div.ibox-content
-								%div
-									= image_tag("graph.png", height: '278', width: '750')
-				%div.row
-					%div.col-md-8
-						%div.ibox.float-e-margins
+  %div#page-wrapper
+    %div.row.border-bottom
+      %nav.navbar.navbar-static-top
+        %ul.nav.navbar-top-links.navbar-right
+          %li
+            = link_to "Log out", login_path
+    %div.wrapper
+      %div.container
+        %div.row.gray-bg
+          %div.col-lg-12
+            %div.ibox.float-e-margins
+              %div.ibox-content
+                %div
+                  = image_tag("graph.png", height: '278', width: '750')
+        %div.row.gray-bg
+          - @crawl_projects.each do |crawl_project|
+            - stats_keys = %w(name cached last_cached last_extraction regression_tests)
+            = render partial: 'crawl_projects/stats_table', locals: {crawl_project: crawl_project, stats_keys: stats_keys}
 
-						%div.ibox-title
-							%h5
-								Crawl Stats
-						%div.ibox-content
-							%div.table-responsive
-								%table.table.table-striped
-									%thead
-										%tr
-											%th
-												Host
-											%th
-												Cached
-											%th
-												Days without crawl
-											%th
-												Last extraction date
-											%th
-												Regression tests
-									%tbody
-										%tr
-											%th
-												foursquare.com
-											%th
-												17820015
-											%th
-												3
-											%th
-												2015-07-27
-											%th
-												51 Passed , 6 Failed
-										%tr
-											%th
-												tastingtable.com
-											%th
-												6351
-											%th
-												80
-											%th
-												2015-06-12
-											%th
-												20 Passed
-					%div.col-md-4
-						%div.row
-							%div.ibox.float-e-margins
-							%div.ibox-title
-								%span.label.label-info.pull-right
-								%h5
-									Crawl activity
-							%div.ibox-content
-								%small.stats-label
-									Leaf Pages cached today
-									%h2
-										4,232,910,335
-							%div.ibox-content
-								%small.stats-label
-									Directory Pages cached today
-									%h2
-										9,791,181
-						%div.row
-							%div.ibox.float-e-margins
-							%div.ibox-title
-								%span.label.label-info.pull-right
-								%h5
-									TODO
-								%div.input-group
-									%input{:type => "text", :id => "task-input", :class => "todo-input", :size => 42, :placeholder => "New task"}
-							%div.ibox-content
-								%ul.todo-list.small-list
-									%li
-										= check_box_tag("1", "task", checked = true)
-										%span
-											Extract foursquare
-										%div.ibox-tools
-											%a.close-link
-												%i.fa.fa-times
-									%li
-										= check_box_tag("2", "task", checked = true)
-										%span
-											Reactivate yahoo crawl
-										%div.ibox-tools
-											%a.close-link
-												%i.fa.fa-times
-						%div.row
-							%div.ibox.float-e-margins
-							%div.ibox-title
-								%span.label.label-warning.pull-right
-								%h5
-									Limit reached notices
-							%div.ibox-content
-								%div.row
-									%div.col-xs-4
-										%small.stats-label
-											Host
-										%h4
-											startlocal.com.au
-									%div.col-xs-4
-										%small.stats-label
-											Limit type
-										%h4
-											Failed
-									%div.col-xs-4
-										%small.stats-label
-											Limit amount
-										%h4
-											8000
+          %div.col-md-4
+            %div.row
+              %div.ibox.float-e-margins
+              %div.ibox-title
+                %span.label.label-info.pull-right
+                %h5
+                  Crawl activity
+              %div.ibox-content
+                %small.stats-label
+                  Leaf Pages cached today
+                  %h2
+                    4,232,910,335
+              %div.ibox-content
+                %small.stats-label
+                  Directory Pages cached today
+                  %h2
+                    9,791,181
+            %div.row
+              %div.ibox.float-e-margins
+              %div.ibox-title
+                %span.label.label-info.pull-right
+                %h5
+                  TODO
+                %div.input-group
+                  %input{:type => "text", :id => "task-input", :class => "todo-input", :size => 42, :placeholder => "New task"}
+              %div.ibox-content
+                %ul.todo-list.small-list
+                  %li
+                    = check_box_tag("1", "task", checked = true)
+                    %span
+                      Extract foursquare
+                    %div.ibox-tools
+                      %a.close-link
+                        %i.fa.fa-times
+                  %li
+                    = check_box_tag("2", "task", checked = true)
+                    %span
+                      Reactivate yahoo crawl
+                    %div.ibox-tools
+                      %a.close-link
+                        %i.fa.fa-times
+            %div.row
+              %div.ibox.float-e-margins
+              %div.ibox-title
+                %span.label.label-warning.pull-right
+                %h5
+                  Limit reached notices
+              %div.ibox-content
+                %div.row
+                  %div.col-xs-4
+                    %small.stats-label
+                      Host
+                    %h4
+                      startlocal.com.au
+                  %div.col-xs-4
+                    %small.stats-label
+                      Limit type
+                    %h4
+                      Failed
+                  %div.col-xs-4
+                    %small.stats-label
+                      Limit amount
+                    %h4
+                      8000
+
+          %div.col-md-8
+            %div.ibox.float-e-margins
+
+            %div.ibox-title
+              %h5
+                Crawl Stats
+            %div.ibox-content
+              %div.table-responsive
+                %table.table.table-striped
+                  %thead
+                    %tr
+                      %th
+                        Host
+                      %th
+                        Cached
+                      %th
+                        Days without crawl
+                      %th
+                        Last extraction date
+                      %th
+                        Regression tests
+                  %tbody
+                    %tr
+                      %th
+                        foursquare.com
+                      %th
+                        17820015
+                      %th
+                        3
+                      %th
+                        2015-07-27
+                      %th
+                        51 Passed , 6 Failed
+                    %tr
+                      %th
+                        tastingtable.com
+                      %th
+                        6351
+                      %th
+                        80
+                      %th
+                        2015-06-12
+                      %th
+                        20 Passed
 
 :javascript 
-	$('form').submit(function () {
-	    if ($('input').val() !== '') {
-	        var input_value = $('input').val();
-	        $('ul').append('<li>' + input_value + '<a href="">x</a></li>');
-	        //$('ul').append('<li>' + input_value '<a href="">x</a></li>');
+  $('form').submit(function () {
+      if ($('input').val() !== '') {
+          var input_value = $('input').val();
+          $('ul').append('<li>' + input_value + '<a href="">x</a></li>');
+          //$('ul').append('<li>' + input_value '<a href="">x</a></li>');
 
-	    };
-	    $('input').val('');
-	    return false;
-	});
+      };
+      $('input').val('');
+      return false;
+  });
 
-	$('#task-input').keypress(function(e) {
-		if(e.which == 13) {
-			if ($('.todo-input').val() !== '') {
-				var input_value = $('.todo-input').val();
-				$('.todo-list').append('<li><input type="checkbox" value="task"><span>\n' + input_value + '<div class="ibox-tools"> <a class="close-link"> <i class="fa fa-times">');
-			}
-		}
-	});
+  $('#task-input').keypress(function(e) {
+    if(e.which == 13) {
+      if ($('.todo-input').val() !== '') {
+        var input_value = $('.todo-input').val();
+        
+        $('.todo-list').append('<li><input type="checkbox" value="task"></input><span>\n' + input_value + '</span><div class="ibox-tools"><a class="close-link"><i class="fa fa-times"></i></a></div></li>').find('.close-link').click(function(e) {
+            e.preventDefault();
+            console.log($(this));
+            $(this).parent().parent().remove();
+            //$(this).closest('li').remove();
+        });
+      }
+    }
+  });
 
-	$('.close-link').click(function(e) {
-	    e.preventDefault();
-	    console.log($(this));
-	    $(this).closest('li').remove();
-	});
+  $('.close-link').click(function(e) {
+      e.preventDefault();
+      console.log($(this));
+      $(this).parent().parent().remove();
+      //$(this).closest('li').remove();
+  });

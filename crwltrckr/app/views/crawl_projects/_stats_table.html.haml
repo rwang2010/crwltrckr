@@ -1,0 +1,38 @@
+%div.col-md-8
+  %div.ibox.float-e-margins
+
+  %div.ibox-title
+    %h5
+      = crawl_project.name
+  %div.ibox-content
+    %div.table-responsive
+      %table.table.table-striped
+        %thead
+          %tr
+            %th
+            - stats_keys.each do |key|
+              %th
+                = key.gsub(/_/, ' ').titleize
+
+        %tbody
+          - crawl_project.hosts.each do |host| 
+            - stats = host.stats 
+            %tr
+              %td
+                = link_to 'x', host_path(host), method: :delete, data: { confirm: 'Are you sure?' } 
+              
+              - stats_keys.each do |key| 
+                %td
+                  - if key == 'regression_tests'
+                    - res = []
+                    - res << "#{stats[key]['passed']} Passed" if stats[key]['passed'] != 0
+                    - res << "#{stats[key]['failed']} Failed" if stats[key]['failed'] != 0
+                    = res.join(',')
+                  - else
+                    = stats[key]  
+
+    = form_for crawl_project do |f| 
+      %p
+        = f.label :add_domain 
+        = f.text_field :host_name 
+        = f.submit

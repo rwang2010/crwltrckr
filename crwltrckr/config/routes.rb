@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
+  get 'users/new'
   get 'dashboard/index'
+
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "sign_up" => "users#new", :as => "sign_up"
+#   root :to => "users#new"
+
+  resources :users
+  resources :sessions
+  resources :crawl_projects
+  resources :hosts
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -9,15 +23,13 @@ Rails.application.routes.draw do
   get "/login", to: 'login#index', as: 'login'
   get "/stats", to: 'stats#index', as: 'stats'
   post "/authenticate", to: 'login#authenticate', as: 'authenticate'
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
 
   # Example resource route with options:
   #   resources :products do
