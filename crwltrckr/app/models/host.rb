@@ -7,7 +7,8 @@ class Host < ActiveRecord::Base
   serialize :cached_ages, Array
   has_and_belongs_to_many :crawl_projects
 
-  PIPELINES_HOST = "http://10.0.100.228:3000"
+#   PIPELINES_HOST = "http://10.0.100.228:3000"
+  PIPELINES_HOST = "http://10.0.100.210:3001"
   CACHED_AGES_UPDATE_INTERVAL = 15 #days 
 
   def stats
@@ -16,7 +17,7 @@ class Host < ActiveRecord::Base
     %w(cached queued found failed).each do |key|
       stats[key] = format_number(stats[key].to_i)
     end
-    stats['regression_tests'] = format_regression_tests(stats["regression_tests"])
+    stats['regression_tests'] = format_regression_tests(stats["regression_tests"]) if stats["regression_tests"]
     stats['last_cached'] = date_to_days_ago(stats["last_cached"])
     stats['last_extraction'] = date_to_days_ago(stats["last_extraction"])
     stats['cached_ages'] = get_cached_ages
