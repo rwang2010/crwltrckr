@@ -1,6 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @rosalyn = "hellodfaffsd"
-    @crawl_projects = CrawlProject.all
+    @crawl_projects = CrawlProject.all.sample(3)
   end
 end
