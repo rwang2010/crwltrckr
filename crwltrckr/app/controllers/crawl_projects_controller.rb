@@ -6,6 +6,9 @@ class CrawlProjectsController < ApplicationController
 
   def show
     @crawl_project = CrawlProject.find(params[:id])
+    @crawl_project.hosts.each do |host|
+      host.refresh_stats
+    end
     @stats_keys = %w(id name crawl_active extract_active recrawl_enabled active_host_patterns found cached queued failed last_cached last_extraction)
   end
 

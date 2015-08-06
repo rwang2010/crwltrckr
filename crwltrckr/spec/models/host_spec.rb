@@ -13,10 +13,12 @@ RSpec.describe Host, :type => :model do
     end
   end
 
-  describe '#stats' do
+  describe '#get_stats' do
     it 'gets stats from pipelines' do
       h = Host.new(pipelines_id: 103)
-      expect(h.stats).to be_truthy
+      h.get_stats
+      expect(h.stats['last_cached']).to be_truthy
     end
   end
+
 end
