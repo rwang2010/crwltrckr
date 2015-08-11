@@ -21,7 +21,7 @@
               = link_to host_path(host), method: :delete, data: { confirm: 'Are you sure?' } do
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 
               = link_to [:refresh, host] do
-                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true" title="last updated #{time_ago_in_words(stats['cached_ages_updated_at'])} ago" data-toggle="tooltip"></span>
 
             - stats_keys.each do |key| 
               %td

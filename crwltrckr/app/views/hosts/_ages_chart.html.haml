@@ -2,6 +2,7 @@
 - percentages = []
 - percentages = ages.map{|c| ((c.to_f / total) * 100).floor } if total != 0
 - colors = ["green", "yellow", "orange", "orangered", "red"]
+- tooltips = ["0 - 3 months", "3 - 6 months", "6 - 12 months", "12 - 24 months", "> 24 months"]
 %div.table-age-cell
   - percentages.each_with_index do |percent, i|
-    %span.table-age-bar{style: "width: #{percent}%; background-color: #{colors[i]}"}
+    %span.table-age-bar{style: "width: #{percent}%; background-color: #{colors[i]}", :'data-toggle' => "tooltip", title: "#{tooltips[i]}" }
