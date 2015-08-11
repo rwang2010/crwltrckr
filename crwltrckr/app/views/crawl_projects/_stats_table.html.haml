@@ -18,8 +18,11 @@
           - stats = host.get_stats
           %tr
             %td
-              = link_to 'x', host_path(host), method: :delete, data: { confirm: 'Are you sure?' } 
-            
+              = link_to host_path(host), method: :delete, data: { confirm: 'Are you sure?' } do
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 
+              = link_to [:refresh, host] do
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 
+
             - stats_keys.each do |key| 
               %td
                 - if key == "name"
