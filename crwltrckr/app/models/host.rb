@@ -7,9 +7,7 @@ class Host < ActiveRecord::Base
   serialize :stats, Hash
   has_and_belongs_to_many :crawl_projects
 
-#   PIPELINES_HOST = "http://10.0.100.228:3000"
-#   PIPELINES_HOST = "http://10.0.100.210:3001"
-  PIPELINES_HOST = "http://10.20.10.103:3000"
+  PIPELINES_HOST = "http://10.20.10.103:3002"
   CACHED_AGES_UPDATE_INTERVAL = 15 #days 
   STATS_UPDATE_INTERVAL = 1 #days 
 
