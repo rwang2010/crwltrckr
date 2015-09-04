@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @crawl_projects = CrawlProject.all.sample(3)
+    @crawl_projects = CrawlProject.order(updated_at: :desc).limit(3)
   end
 end
