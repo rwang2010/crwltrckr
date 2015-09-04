@@ -9,7 +9,7 @@ class CrawlProjectsController < ApplicationController
     @crawl_project.hosts.each do |host|
       host.refresh_stats
     end
-    @stats_keys = %w(id name crawl_active extract_active recrawl_enabled active_host_patterns found cached queued failed last_cached last_extraction)
+    @stats_keys = %w(id name crawl_active extract_active recrawl_enabled active_host_patterns found cached queued failed last_cached last_extraction regression_tests)
   end
 
   def new
